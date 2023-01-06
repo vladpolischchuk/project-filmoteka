@@ -1,14 +1,36 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Page title</title>
+
+    <title>Filmoteka</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
+
+    <!-- Styles -->
     <link rel="stylesheet" href="./sass/index.scss" />
-    <script type="module" src="./index.js"></script>
+
   </head>
   <body>
-    <!-- ❗️❗️❗️ Add partials like so for every page -->
-    <include src="./partials/example.html"></include>
+    <!-- Header -->
+    <include src="./partials/header-home-page.html"></include>
+
+    <!-- Unique content -->
+    <main>
+
+      <!-- Gallery -->
+      <include src="./partials/section-gallery.html"></include>
+    </main>
+
+    <!-- Footer -->
+
+
+    <!-- Modal window for details info for film -->
+    <include src="./partials/md-win-info-film.html"></include>
+   
+    <!-- Scripts -->
+    <script type="module" src="./index.js"></script>
   </body>
 </html>
