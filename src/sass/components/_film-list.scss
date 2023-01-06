@@ -1,0 +1,127 @@
+.film-list {
+    display: flex;
+    flex-wrap: wrap;
+
+    justify-content: center;
+    align-items: stretch;
+    gap: 20px;
+}
+
+.film-list__item {
+    max-width: 280px;
+    border-radius: 5px;
+
+    cursor: pointer;
+    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    background-color: var(--primary-txt-cl);
+
+    &:hover {
+        transform: scale(1.025);
+    }
+}
+
+.film-link__img {
+    border-radius: 5px;
+}
+
+.film-link__title {
+    margin-top: 8px;
+
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.33;
+
+    text-transform: uppercase;
+    color: var(--black-cl);
+}
+
+.film-link__grup {
+    display: flex;
+    gap: 7px;
+}
+
+.film-genres {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+
+    line-height: 1.33;
+    color: var(--accent-cl);
+    text-transform: none;
+}
+
+.film-year {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+
+    line-height: 1.33;
+    color: var(--accent-cl);
+}
+
+.film-line {
+    margin-right: 7px;
+
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+
+    line-height: 1.33;
+    color: var(--accent-cl);
+}
+
+@media screen and (min-width: 768px) {
+    .film-list {
+        justify-content: left;
+        gap: 32px;
+        margin-bottom: 60px;
+    }
+
+    .film-list__item {
+        max-width: 336px;
+    }
+
+    .film-link__grup {
+        display: flex;
+        gap: 8px;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .film-list {
+        gap: 16px;
+    }
+
+    .film-list__item{
+        max-width: 394px;
+    }
+
+    .film-link__title {
+        font-size: 20px;
+        line-height: 1.2;
+        margin-top: 12px;
+    }
+
+    .film-link__grup {
+        margin-bottom: 16px;
+    }
+
+    .film-genres {
+        font-size: 20px;
+        line-height: 1.2;
+    }
+
+    .film-year {
+        font-size: 20px;
+        line-height: 1.2;
+    }
+
+    .film-line {
+        font-size: 20px;
+        line-height: 1.2;
+        margin-right: 7px;
+    }
+
+}

@@ -1,2 +1,19 @@
 @import './common';
 
+// utils
+@import './utils/variables';
+@import './utils/animation';
+@import './utils/visually-hidden';
+
+// base
+@import './base/base';
+@import './base/container';
+
+// layouts
+@import './layouts/header-home-page';
+@import './layouts/gallery';
+
+// components
+@import './components/form-search';
+@import './components/film-list';
+@import './components/md-win-info-film';
