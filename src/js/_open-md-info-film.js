@@ -71,7 +71,7 @@ listOfMovies.addEventListener('click', openMovieModal);
 
 export default function closeMovieModalWindow() {
     backdrop.classList.add('is-hidden');
-    document.addEventListener('click', openMovieModal);
     bodyPage.innerHTML = '';
+    document.addEventListener('click', openMovieModal);
 }
-
+s
