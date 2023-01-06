@@ -74,4 +74,3 @@ export default function closeMovieModalWindow() {
     bodyPage.innerHTML = '';
     document.addEventListener('click', openMovieModal);
 }
-s
