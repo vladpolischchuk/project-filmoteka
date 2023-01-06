@@ -2,7 +2,6 @@ import { refs } from './refs';
 import { fetchMovieInfoAPI } from './API/fetch-film-api';
 
 const BASE_IMG_URL = 'https://image.tmdb.org/t/p/w500';
-const listOfMovies = document.querySelector('.home-film-list');
 
 // function for render modal markup 
 function createModalMarkup({ id, genres, original_title, overview, popularity, poster_path, title, vote_average, vote_count }) {
@@ -63,7 +62,7 @@ export default function openMovieModal(e) {
         .then(createModalMarkup);
 }
  
-listOfMovies.addEventListener('click', openMovieModal);
+refs.listOfMovies.addEventListener('click', openMovieModal);
 
 export default function closeMovieModalWindow() {
     refs.backDrop.classList.add('is-hidden');
