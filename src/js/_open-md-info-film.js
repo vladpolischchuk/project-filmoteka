@@ -3,10 +3,7 @@ import { fetchMovieInfoAPI } from './API/fetch-film-api';
 
 const BASE_IMG_URL = 'https://image.tmdb.org/t/p/w500';
 const listOfMovies = document.querySelector('.home-film-list');
-const bodyPage = document.querySelector('.wrapper-modal');
-const backdrop = document.querySelector('.backdrop')
-const closeBTN = document.querySelector('.close-btn');
- 
+
 // function for render modal markup 
 function createModalMarkup({ id, genres, original_title, overview, popularity, poster_path, title, vote_average, vote_count }) {
     let markup = `
@@ -52,14 +49,13 @@ function createModalMarkup({ id, genres, original_title, overview, popularity, p
 
     </div>`;
     
-    bodyPage.insertAdjacentHTML('afterBegin', markup);
-    backdrop.classList.remove('is-hidden');
-    closeBTN.addEventListener('click', closeMovieModalWindow);
+    refs.bodyModal.insertAdjacentHTML('afterBegin', markup);
+    refs.backDrop.classList.remove('is-hidden');
+    refs.closeBtn.addEventListener('click', closeMovieModalWindow);
 };
 
 export default function openMovieModal(e) {
     const movieCardEl = e.target.closest('li');
-    console.log(movieCardEl.dataset.id)
     const movieId = movieCardEl.dataset.id;
 
     document.removeEventListener('click', openMovieModal);
@@ -70,7 +66,7 @@ export default function openMovieModal(e) {
 listOfMovies.addEventListener('click', openMovieModal);
 
 export default function closeMovieModalWindow() {
-    backdrop.classList.add('is-hidden');
-    bodyPage.innerHTML = '';
+    refs.backDrop.classList.add('is-hidden');
+    refs.bodyModal.innerHTML = '';
     document.addEventListener('click', openMovieModal);
 }
