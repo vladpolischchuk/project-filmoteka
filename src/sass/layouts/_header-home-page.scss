@@ -1,0 +1,158 @@
+.page-header {
+    padding-top: 40px;
+    padding-bottom: 80px;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+    @media screen and (max-width: 576px) {
+    background-image: linear-gradient(to right,
+                    var(--hero-bg),
+                    var(--hero-bg)),
+                    url(../images/header-home-page/background-tel.jpg);
+    }
+
+    @media screen and (min-width: 577px) and (max-width: 960px) {
+        background-image: linear-gradient(to right,
+                        var(--hero-bg),
+                        var(--hero-bg)),
+                        url(../images/header-home-page/background-tablet.jpg);
+    }
+
+    @media screen and (min-width: 961px) {
+        background-image: linear-gradient(to right,
+                        var(--hero-bg),
+                        var(--hero-bg)),
+                        url(../images/header-home-page/background-pc.jpg);
+    }
+}
+
+// Фонове зображення для retina-екранів
+@media screen and (max-width: 576px) {
+
+    @media (min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+        .hero {
+            background-image: linear-gradient(to right,
+                    var(--hero-bg),
+                    var(--hero-bg)),
+                url(../images/header-home-page/background-tel@2x.jpg);
+        }
+    }
+}
+
+@media screen and (min-width: 577px) and (max-width: 960px) {
+
+    @media (min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+        .hero {
+            background-image: linear-gradient(to right,
+                    var(--hero-bg),
+                    var(--hero-bg)),
+                url(../images/header-home-page/background-tablet@2x.jpg);
+        }
+    }
+}
+
+@media screen and (min-width: 961px) {
+
+    @media (min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+        .hero {
+            background-image: linear-gradient(to right,
+                    var(--hero-bg),
+                    var(--hero-bg)),
+                url(../images/header-home-page/background-pc@2x.jpg);
+        }
+    }
+}
+
+.link__active::after {
+    content: "";
+    display: block;
+
+    width: 100%;
+    height: 2px;
+
+    background-color: #FF001B;
+    background-repeat: no-repeat;
+    background-size: 70px 70px;
+    background-position: center;
+
+}
+
+.wrapper-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 40px;
+}
+
+.logo{
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    color: var(--primary-txt-cl);
+
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.logo__icon {
+    width: 24px;
+    height: 24px;
+
+    stroke: currentColor;
+
+    animation: logo-rot 5s infinite;
+}
+
+.logo__title {
+    margin-left: 10px;
+
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 1.16;
+}
+
+@media screen and (max-width: 769px) {
+    .logo__title {
+        display: none;
+    }
+}
+
+.logo:focus,
+.logo:hover {
+    color: var(--accent-cl);
+}
+
+.navigation__list {
+    display: flex;
+}
+
+.navigation__item:not(:first-child) {
+    margin-left: 40px;
+}
+
+.navigation__link {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+    text-transform: uppercase;
+
+    color: var(--primary-txt-cl);
+
+    transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1), filter 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navigation__link:hover,
+.navigation__link:focus {
+    filter: drop-shadow(0px 8px 43px rgba(255, 107, 1, 0.6));
+    color: var(--accent-cl);
+}
