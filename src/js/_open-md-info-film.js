@@ -59,14 +59,13 @@ function createModalMarkup({ id, genres, original_title, overview, popularity, p
 };
 
 export default function openMovieModal(e) {
-    const movieCardEl = e.target.closest('li');
-    console.log(movieCardEl.dataset.id)
-    const movieId = movieCardEl.dataset.id;
+    const movieId = e.target.closest('li').dataset.id;
+    console.log(movieId);
 
     document.removeEventListener('click', openMovieModal);
      fetchMovieInfoAPI(movieId)
         .then(createModalMarkup);
-}
+}   
 
 listOfMovies.addEventListener('click', openMovieModal);
 
