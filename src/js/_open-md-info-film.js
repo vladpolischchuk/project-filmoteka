@@ -8,7 +8,10 @@ const closeBTN = document.querySelector('.close-btn');
 
 // function for render modal markup 
 function createModalMarkup({ id, genres, original_title, overview, popularity, poster_path, title, vote_average, vote_count }) {
-    let modalMarkup = `
+    const voteNumeric = String(vote_average).slice(0, 3);
+    const popularityNumeric = popularity.toFixed(1);
+
+    const modalMarkup = `
     <div class="wrapper-modal">
         <div class="film-modal__poster">
             <img class='film-modal__img' width="375" height="478" src="${refs.BASE_IMG_URL}${poster_path}"
@@ -24,14 +27,14 @@ function createModalMarkup({ id, genres, original_title, overview, popularity, p
                 <li class="list-static__item">
                     <p class="info-film-txt">Vote / Votes</p>
                     <p class="item-vote-rez">
-                        <span class="tem-vote-rez--accent-mode">${vote_average}</span>
+                        <span class="tem-vote-rez--accent-mode">${voteNumeric}</span>
                         ${vote_count}
                     </p>
                 </li>
         
                 <li class="list-static__item">
                     <p class="info-film-txt">Popularity</p>
-                    <p class='rez'>${popularity}</p>
+                    <p class='rez'>${popularityNumeric}</p>
                 </li>
         
                 <li class="list-static__item">
@@ -61,10 +64,10 @@ export default function openMovieModal(e) {
     if (e.target.dataset.target !== 'card') {
         return;
     } else {
-        const Id = e.target.closest('li').dataset.id;
+        const movieId = e.target.closest('li').dataset.id;
 
         document.removeEventListener('click', openMovieModal);
-        fetchMovieInfoAPI(Id)
+        fetchMovieInfoAPI(movieId)
             .then(createModalMarkup);
     }
 }   
