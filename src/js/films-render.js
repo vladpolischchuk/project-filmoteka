@@ -1,8 +1,6 @@
 import { fetchPopularFilmsAPI, fetchGenresFilmsAPI } from './API/fetch-film-api';
 import { refs } from './refs';
 
-const BASE_IMG_URL = 'https://image.tmdb.org/t/p/w500';
-
 // function for render film list markup 
 function createFilmListFMarkup(data, genres_names) {
     if (data.length === 0) {
@@ -22,7 +20,7 @@ function createFilmListFMarkup(data, genres_names) {
             let genres_str = genres.join(', ');
             return `
             <li class="film-list__item item" data-id="${id}">
-                <img class="film-link__img" width="500px" src="${BASE_IMG_URL}${poster_path}" alt="${title}" data-id="${id}" data-target="card">
+                <img class="film-link__img" width="500px" src="${refs.BASE_IMG_URL}${poster_path}" alt="${title}" data-id="${id}" data-target="card">
                 <div class="wrapper">
                     <h3 class="film-link__title" data-target="card">${title}</h3>
                     <div class="film-link__grup">

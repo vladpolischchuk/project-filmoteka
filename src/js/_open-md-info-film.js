@@ -1,7 +1,6 @@
 import { refs } from './refs';
 import { fetchMovieInfoAPI } from './API/fetch-film-api';
 
-const BASE_IMG_URL = 'https://image.tmdb.org/t/p/w500';
 const listOfMovies = document.querySelector('.home-film-list');
 const bodyPage = document.querySelector('.wrapper-modal');
 const backdrop = document.querySelector('.backdrop')
@@ -9,10 +8,10 @@ const closeBTN = document.querySelector('.close-btn');
 
 // function for render modal markup 
 function createModalMarkup({ id, genres, original_title, overview, popularity, poster_path, title, vote_average, vote_count }) {
-    let markup = `
+    let modalMarkup = `
     <div class="wrapper-modal">
         <div class="film-modal__poster">
-            <img class='film-modal__img' width="375" height="478" src="${BASE_IMG_URL}${poster_path}"
+            <img class='film-modal__img' width="375" height="478" src="${refs.BASE_IMG_URL}${poster_path}"
                 alt="${title}" />
         </div>
         
@@ -53,7 +52,7 @@ function createModalMarkup({ id, genres, original_title, overview, popularity, p
         </div>
     </div>`;
 
-    bodyPage.insertAdjacentHTML('afterBegin', markup);
+    bodyPage.insertAdjacentHTML('afterBegin', modalMarkup);
     backdrop.classList.remove('is-hidden');
     closeBTN.addEventListener('click', closeMovieModalWindow);
 };
@@ -62,10 +61,10 @@ export default function openMovieModal(e) {
     if (e.target.dataset.target !== 'card') {
         return;
     } else {
-        const movieId = e.target.closest('li').dataset.id;
+        const Id = e.target.closest('li').dataset.id;
 
         document.removeEventListener('click', openMovieModal);
-        fetchMovieInfoAPI(movieId)
+        fetchMovieInfoAPI(Id)
             .then(createModalMarkup);
     }
 }   
