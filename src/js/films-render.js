@@ -22,12 +22,12 @@ function createFilmListFMarkup(data, genres_names) {
             let genres_str = genres.join(', ');
             return `
             <li class="film-list__item item" data-id="${id}">
-                <img class="film-link__img" width="500px" src="${BASE_IMG_URL}${poster_path}" alt="${title}">
+                <img class="film-link__img" width="500px" src="${BASE_IMG_URL}${poster_path}" alt="${title}" data-id="${id}" data-target="card">
                 <div class="wrapper">
-                    <h3 class="film-link__title">${title}</h3>
+                    <h3 class="film-link__title" data-target="card">${title}</h3>
                     <div class="film-link__grup">
-                        <p class="film-genres">${genres_str}</p>
-                        <p class="film-year"><span class="film-line">|</span>${release}</p>
+                        <p class="film-genres" data-target="card">${genres_str}</p>
+                        <p class="film-year" data-target="card"><span class="film-line">|</span>${release}</p>
                     </div>
                 </div>
             </li>`;}).join('');

@@ -59,12 +59,15 @@ function createModalMarkup({ id, genres, original_title, overview, popularity, p
 };
 
 export default function openMovieModal(e) {
-    const movieId = e.target.closest('li').dataset.id;
-    console.log(movieId);
+    if (e.target.dataset.target !== 'card') {
+        return;
+    } else {
+        const movieId = e.target.closest('li').dataset.id;
 
-    document.removeEventListener('click', openMovieModal);
-     fetchMovieInfoAPI(movieId)
-        .then(createModalMarkup);
+        document.removeEventListener('click', openMovieModal);
+        fetchMovieInfoAPI(movieId)
+            .then(createModalMarkup);
+    }
 }   
 
 listOfMovies.addEventListener('click', openMovieModal);
