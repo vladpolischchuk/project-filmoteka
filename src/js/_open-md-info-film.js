@@ -62,7 +62,7 @@ export default function openMovieModal(e) {
         .then(createModalMarkup);
 }
  
-refs.listOfMovies.addEventListener('click', openMovieModal);
+refs.popularMovieList.addEventListener('click', openMovieModal);
 
 export default function closeMovieModalWindow() {
     refs.backDrop.classList.add('is-hidden');
