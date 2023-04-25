@@ -13,6 +13,10 @@ function createModalMarkup({ id, genres, original_title, overview, popularity, p
     const voteNumeric = String(vote_average).slice(0, 3);
     const popularityNumeric = popularity.toFixed(1);
 
+    const nameGenres = genres.map((item) => {
+       return item.name;
+    });
+
     const modalMarkup = `
         <div class="film-modal__poster">
             <img class='film-modal__img' width="375" height="478" src="${refs.BASE_IMG_URL}${poster_path}"
@@ -45,7 +49,7 @@ function createModalMarkup({ id, genres, original_title, overview, popularity, p
         
                 <li class="list-static__item">
                     <p class="info-film-txt">Genre</p>
-                    <p class='rez'>${genres}</p>
+                    <p class='rez'>${nameGenres} </p>
                 </li>
             </ul>
         
@@ -70,9 +74,12 @@ export default function openMovieModal(e) {
         const movieId = e.target.closest('li').dataset.id;
 
         document.removeEventListener('click', openMovieModal);
+    
         fetchMovieInfoAPI(movieId)
             .then(createModalMarkup);
-    }
+
+        backdrop.addEventListener('click', closeMovieModalWindowBackdrop);
+    };
 };   
 
 
@@ -84,4 +91,19 @@ export default function closeMovieModalWindow() {
     document.addEventListener('click', openMovieModal);
 };
 
+function closeMovieModalWindowBackdrop(e) {
+    if (e.target.classList.contains('backdrop')) {
+        closeMovieModalWindow();
+        backdrop.removeEventListener('click', closeMovieModalWindowBackdrop)
+    } 
+};
+
+const closeMovieModalWindowEscape = event => {
+    if (event.code === 'Escape') {
+        closeMovieModalWindow();
+        window.removeEventListener('keydown', closeMovieModalWindowEscape);
+    }
+};
+
 listOfMovies.addEventListener('click', openMovieModal);
+window.addEventListener('keydown', closeMovieModalWindowEscape);

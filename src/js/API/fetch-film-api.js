@@ -6,6 +6,7 @@ export {
   fetchPopularFilmsAPI,
   fetchGenresFilmsAPI,
   fetchMovieInfoAPI,
+  fetchMovieSearchAPI,
 };
 
 // fetch information about popular movies
@@ -65,5 +66,24 @@ async function fetchMovieInfoAPI(movie_id) {
         'There has been a problem with your fetch operation:',
         error
       );
+    });
+};
+
+// fetch search movie
+async function fetchMovieSearchAPI(searchQuery) {
+  return await fetch(
+    `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&query=${searchQuery}&page=${page}&include_adult=folse`
+  )
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not OK');
+      }
+      return response.json();
+    })
+    .then(data => {
+      return data.results;
+    })
+    .catch(error => {
+      console.error('error:', error);
     });
 };

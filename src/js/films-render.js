@@ -6,6 +6,7 @@ export function createFilmListFMarkup(data, genres_names) {
     if (data.length === 0) {
         return;
     }
+
     return data
         .map(({ id, title, poster_path, release_date, genre_ids }) => {
             let release = release_date.slice(0, 4);
