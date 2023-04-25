@@ -3,10 +3,13 @@
     top: 0;
     z-index: 7;
 
+
     width: 100vw;
     height: 100vh;
 
     background-color: hsla(0, 0%, 0%, 0.4);
+
+    overflow-y: scroll;
     opacity: 1;
     transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1),
                 visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -23,21 +26,40 @@
     transform: translate(-50%, -50%) scale(1.2);
 }
 
-.film-modal {
-    position: relative;
-    top: 50%;
+.backdrop .film-modal {
+    position: absolute;
+    top: 74%;
     left: 50%;
     z-index: 12;
     padding: 40px 15px 40px 15px;
-    width: 806px;
 
-    transform: translate(-50%, -50%);
+    width: 280px;
+    height: 940px;
+
+
+    transform: translate(-50%, -50%) scale(1);
     background-color: white;
     box-shadow: 2px 4px 3px rgba(0, 0, 0, 0.12), 2px 4px 5px rgba(0, 0, 0, 0.14), 2px 4px 5px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
 
     transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
     transform-origin: center;
+
+    @media screen and (min-width: 767.5px) {
+        top: 50%;
+        padding-left: 36px;
+        padding-right: 72px;
+
+        width: 704px;
+        height: 552px;
+    }
+
+    @media screen and (min-width: 1199.5px) {
+        top: 50%;
+
+        width: 806px;
+        height: 558px;
+    }
 }
 
 .close-btn {
@@ -68,24 +90,63 @@
 
 .wrapper-modal {
     display: flex;
-    gap: 16px;
+    flex-direction: column;
+
+    @media screen and (min-width: 767.5px) {
+       flex-direction: row;
+    }
 }
 
 .film-modal__poster {
-    flex: 50%;
+    margin-bottom: 20px;
+}
+
+.film-modal__img {
+    width: 250px;
+    height: 357px;
+
+    
+    @media screen and (min-width: 767.5px) {
+        width: 264px;
+        height: 374px;
+    }
+
+    @media screen and (min-width: 1199.5px) {
+        width: 375px;
+        height: 478px;
+    }
+}
+
+.film-modal__details-info {
+    @media screen and (min-width: 767.5px) {
+        margin-left: 68px;
+    }
+
+    @media screen and (min-width: 1199.5px) {
+        margin-left: 16px;
+    }
 }
 
 .details-info {
     flex: 50%;
+
+    @media screen and (min-width: 767.5px) {
+       flex: 44%;
+    }
 }
 
 .details-info__title {
     margin-bottom: 20px;
 
     font-weight: 500;
-    font-size: 30px;
-    line-height: 1.16;
+    font-size: 20px;
+    line-height: 1.15;
     text-transform: uppercase;
+
+    @media screen and (min-width: 1199.5px) {
+        font-size: 30px;
+        line-height: 1.16;
+     }
 }
 
 .details-info__list-static {
@@ -115,11 +176,12 @@
     font-weight: 500;
     font-size: 12px;
     line-height: 1.33;
-    text-transform: uppercase;
+   
 }
 
-.rez-margin {
+.rez-title {
     margin-bottom: 8px;
+    text-transform: uppercase;
 }
 
 .rez-desc {

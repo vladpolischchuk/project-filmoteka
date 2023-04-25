@@ -1,3 +1,5 @@
+import scrollLock from 'scroll-lock';
+
 import { refs } from './refs';
 import { fetchMovieInfoAPI } from './API/fetch-film-api';
 
@@ -12,7 +14,6 @@ function createModalMarkup({ id, genres, original_title, overview, popularity, p
     const popularityNumeric = popularity.toFixed(1);
 
     const modalMarkup = `
-    <div class="wrapper-modal">
         <div class="film-modal__poster">
             <img class='film-modal__img' width="375" height="478" src="${refs.BASE_IMG_URL}${poster_path}"
                 alt="${title}" />
@@ -49,33 +50,38 @@ function createModalMarkup({ id, genres, original_title, overview, popularity, p
             </ul>
         
             <div class="details-info__group">
-                <p class="rez rez-margin">about</p>
+                <p class="rez rez-title">about</p>
                 <p class="rez rez-desc">${overview}</p>
             </div>
-        </div>
-    </div>`;
+        </div>`;
 
     bodyPage.insertAdjacentHTML('afterBegin', modalMarkup);
     backdrop.classList.remove('is-hidden');
     closeBTN.addEventListener('click', closeMovieModalWindow);
 };
 
+// function open/close modal window
 export default function openMovieModal(e) {
     if (e.target.dataset.target !== 'card') {
         return;
     } else {
+        scrollLock.disablePageScroll();
+
         const movieId = e.target.closest('li').dataset.id;
 
         document.removeEventListener('click', openMovieModal);
         fetchMovieInfoAPI(movieId)
             .then(createModalMarkup);
     }
-}   
+};   
 
-listOfMovies.addEventListener('click', openMovieModal);
 
 export default function closeMovieModalWindow() {
-    backdrop.classList.add('is-hidden');
+    scrollLock.enablePageScroll();
+
     bodyPage.innerHTML = '';
+    backdrop.classList.add('is-hidden');
     document.addEventListener('click', openMovieModal);
-}
+};
+
+listOfMovies.addEventListener('click', openMovieModal);

@@ -2,7 +2,7 @@ import { fetchPopularFilmsAPI, fetchGenresFilmsAPI } from './API/fetch-film-api'
 import { refs } from './refs';
 
 // function for render film list markup 
-function createFilmListFMarkup(data, genres_names) {
+export function createFilmListFMarkup(data, genres_names) {
     if (data.length === 0) {
         return;
     }
@@ -18,17 +18,30 @@ function createFilmListFMarkup(data, genres_names) {
                 genres = [genres[0], genres[1], 'Other'];
             };
             let genres_str = genres.join(', ');
-            return `
-            <li class="film-list__item item" data-id="${id}">
-                <img class="film-link__img" width="500px" src="${refs.BASE_IMG_URL}${poster_path}" alt="${title}" data-id="${id}" data-target="card">
-                <div class="wrapper">
-                    <h3 class="film-link__title" data-target="card">${title}</h3>
-                    <div class="film-link__grup">
-                        <p class="film-genres" data-target="card">${genres_str}</p>
-                        <p class="film-year" data-target="card"><span class="film-line">|</span>${release}</p>
+            if (poster_path !== null) {
+                return `
+                <li class="film-list__item item" data-id="${id}  data-target="card">
+                    <img class="film-link__img" src="${refs.BASE_IMG_URL}${poster_path}" alt="${title}" data-target="card"">
+                    <div class="wrapper">
+                        <h3 class="film-link__title data-target="card"" >${title}</h3>
+                        <div class="film-link__grup">
+                            <p class="film-genres" data-target="card">${genres_str}</p>
+                            <p class="film-year" data-target="card"><span class="film-line">|</span>${release}</p>
+                        </div>
                     </div>
-                </div>
-            </li>`;}).join('');
+                </li>`;
+            }
+            return `
+                <li class="film-list__item item" data-id="${id}  data-target="card">
+                    <img class="film-link__img" src="./images/plug/plugImg.png" alt="${title}" data-target="card"">
+                    <div class="wrapper">
+                        <h3 class="film-link__title data-target="card"" >${title}</h3>
+                        <div class="film-link__grup">
+                            <p class="film-genres" data-target="card">${genres_str}</p>
+                            <p class="film-year" data-target="card"><span class="film-line">|</span>${release}</p>
+                        </div>
+                    </div>
+                </li>`;}).join('');
 };
 
 fetchGenresFilmsAPI().then(genres => {
