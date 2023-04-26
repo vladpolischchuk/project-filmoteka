@@ -91,14 +91,12 @@ export default function closeMovieModalWindow() {
 function closeMovieModalWindowBackdrop(e) {
     if (e.target.classList.contains('backdrop')) {
         closeMovieModalWindow();
-        backdrop.removeEventListener('click', closeMovieModalWindowBackdrop)
     } 
 };
 
 const closeMovieModalWindowEscape = event => {
     if (event.code === 'Escape') {
         closeMovieModalWindow();
-        window.removeEventListener('keydown', closeMovieModalWindowEscape);
     }
 };
 
