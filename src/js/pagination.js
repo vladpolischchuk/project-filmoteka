@@ -32,11 +32,12 @@ const options = {
     },
 };
 
-export const pagination = new Pagination('pagination', options);
+const paginationID = document.querySelector('pagination');
+export const pagination = new Pagination(paginationID, options);
 export const numberPage = pagination.getCurrentPage();
 
 pagination.on('afterMove', event => {
-  const {page} = event;
+  const page = event.page;
 
   fetchGenresMovieAPI().then(genres => {
       fetchMorePopularMovieAPI(page).then(data => {

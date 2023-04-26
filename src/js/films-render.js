@@ -36,7 +36,7 @@ export function createMovieListMarkup(data, genres_names) {
             }
             return `
                 <li class="film-list__item item" data-id="${id}  data-target="card">
-                <img class="film-link__img" src="../images/header-home-page/background-pc.jpg" alt="${title}" data-target="card"">
+                <img class="film-link__img" src="" alt="${title}" data-target="card"">
                     <div class="wrapper">
                         <h3 class="film-link__title data-target="card"" >${title}</h3>
                         <div class="film-link__grup">
