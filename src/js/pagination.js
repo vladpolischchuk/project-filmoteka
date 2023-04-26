@@ -1,8 +1,9 @@
 import Pagination from 'tui-pagination';
 import 'tui-pagination/dist/tui-pagination.css';
 
-import { fetchGenresMovieAPI, fetchMorePopularMovieAPI } from './API/fetch-film-api';
 import { createMovieListMarkup } from './films-render';
+import { fetchGenresMovieAPI, fetchMorePopularMovieAPI } from './API/fetch-film-api';
+
 import { refs } from './refs';
 
 const options = {
