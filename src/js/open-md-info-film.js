@@ -84,10 +84,12 @@ export default function openMovieModal(e) {
 
 
 export default function closeMovieModalWindow() {
-    scrollLock.enablePageScroll();
 
     bodyPage.innerHTML = '';
     backdrop.classList.add('is-hidden');
+
+    scrollLock.enablePageScroll();
+
     document.addEventListener('click', openMovieModal);
 };
 
