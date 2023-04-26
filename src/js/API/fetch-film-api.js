@@ -1,5 +1,3 @@
-import { pagination } from "../pagination";
-
 const BASE_URL = 'https://api.themoviedb.org/3';
 const API_KEY = 'cf961b1b89f4c4a28558be2b04fdd59a';
 
@@ -22,7 +20,6 @@ async function fetchPopularMovieAPI(page) {
       return response.json();
     })
     .then(data => {
-      pagination.reset(data.total_results);
 
       return data.results;
     })
@@ -34,30 +31,30 @@ async function fetchPopularMovieAPI(page) {
     });
 };
 
-// fetch more popular movie
-async function fetchMorePopularMovieAPI(page) {
-  return await fetch(`${BASE_URL}/trending/movie/day?api_key=${API_KEY}&page=${page}`)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not OK');
-      }
-      return response.json();
-    })
-    .then(data => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth',
-      });
+// // fetch more popular movie
+// async function fetchMorePopularMovieAPI(page) {
+//   return await fetch(`${BASE_URL}/trending/movie/day?api_key=${API_KEY}&page=${page}`)
+//     .then(response => {
+//       if (!response.ok) {
+//         throw new Error('Network response was not OK');
+//       }
+//       return response.json();
+//     })
+//     .then(data => {
+//       window.scrollTo({
+//         top: 0,
+//         behavior: 'smooth',
+//       });
 
-      return data.results;
-    })
-    .catch(error => {
-      console.error(
-        'There has been a problem with your fetch operation:',
-        error
-      );
-    });
-};
+//       return data.results;
+//     })
+//     .catch(error => {
+//       console.error(
+//         'There has been a problem with your fetch operation:',
+//         error
+//       );
+//     });
+// };
 
 // fetch id and names ganre for movies
 async function fetchGenresMovieAPI() {
@@ -99,21 +96,21 @@ async function fetchMovieInfoAPI(movie_id) {
     });
 };
 
-// // fetch search movie
-// async function fetchMovieSearchAPI(searchQuery) {
-//   return await fetch(
-//     `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&query=${searchQuery}&page=${1}&include_adult=folse`
-//   )
-//     .then(response => {
-//       if (!response.ok) {
-//         throw new Error('Network response was not OK');
-//       }
-//       return response.json();
-//     })
-//     .then(data => {
-//       return data.results;
-//     })
-//     .catch(error => {
-//       console.error('error:', error);
-//     });
-// };
+// fetch search movie
+async function fetchMovieSearchAPI(searchQuery) {
+  return await fetch(
+    `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&query=${searchQuery}&page=${1}&include_adult=folse`
+  )
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not OK');
+      }
+      return response.json();
+    })
+    .then(data => {
+      return data.results;
+    })
+    .catch(error => {
+      console.error('error:', error);
+    });
+};

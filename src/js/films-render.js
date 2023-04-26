@@ -1,7 +1,7 @@
 import { fetchPopularMovieAPI, fetchGenresMovieAPI } from './API/fetch-film-api';
 import { refs } from './refs';
 
-import { numberPage } from './pagination';
+const numberPage = 1;
 
 // function for render film list markup 
 export function createMovieListMarkup(data, genres_names) {
