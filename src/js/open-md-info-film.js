@@ -69,6 +69,7 @@ export default function openMovieModal(e) {
     } else {
 
         const movieId = e.target.closest('li').dataset.id;
+        backdrop.addEventListener('click', closeMovieModalWindowBackdrop);
     
         fetchMovieInfoAPI(movieId)
             .then(createModalMarkup);
@@ -77,8 +78,24 @@ export default function openMovieModal(e) {
 
 
 function closeMovieModalWindow() {
+
+    bodyPage.innerHTML = "";
     backdrop.classList.add('is-hidden');
 };
 
+function closeMovieModalWindowBackdrop(e) {
+    if (e.target.classList.contains('backdrop')) {
+        closeMovieModalWindow();
+    };
+
+    listOfMovies.addEventListener('click', openMovieModal);
+};
+
+const closeMovieModalWindowEscape = event => {
+    if (event.code === 'Escape') {
+        closeMovieModalWindow();
+    };
+};
 
 listOfMovies.addEventListener('click', openMovieModal);
+window.addEventListener('keydown', closeMovieModalWindowEscape);
