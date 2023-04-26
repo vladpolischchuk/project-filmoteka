@@ -1,7 +1,7 @@
 import { fetchPopularMovieAPI, fetchGenresMovieAPI } from './API/fetch-film-api';
 import { refs } from './refs';
 
-import { currentPage } from './pagination';
+import { numberPage } from './pagination';
 
 // function for render film list markup 
 export function createMovieListMarkup(data, genres_names) {
@@ -48,7 +48,7 @@ export function createMovieListMarkup(data, genres_names) {
 };
 
 fetchGenresMovieAPI().then(genres => {
-    fetchPopularMovieAPI(currentPage).then(data => {
+    fetchPopularMovieAPI(numberPage).then(data => {
         let markup = createMovieListMarkup(data, genres);
         refs.popularMovieList.insertAdjacentHTML('beforeend', markup);
     });

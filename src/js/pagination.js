@@ -33,7 +33,7 @@ const options = {
 };
 
 export const pagination = new Pagination('pagination', options);
-export const currentPage = pagination.getCurrentPage();
+export const numberPage = pagination.getCurrentPage();
 
 pagination.on('afterMove', event => {
   const {page} = event;

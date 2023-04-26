@@ -7,7 +7,7 @@ const searchForm = document.querySelector('.form-search');
 async function onInput(e) {
     e.preventDefault();
   
-    value = e.target.elements.searchQuery.value.trim();
+    const value = e.target.elements.searchQuery.value.trim();
 
     await fetchGenresMovieAPI().then(genres => {
         fetchMovieSearchAPI(value).then(data => {
