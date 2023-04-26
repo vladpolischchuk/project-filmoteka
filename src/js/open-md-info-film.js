@@ -76,7 +76,7 @@ export default function openMovieModal(e) {
 };   
 
 
-export default function closeMovieModalWindow() {
+function closeMovieModalWindow() {
     backdrop.classList.add('is-hidden');
 };
 
