@@ -99,21 +99,21 @@ async function fetchMovieInfoAPI(movie_id) {
     });
 };
 
-// fetch search movie
-async function fetchMovieSearchAPI(searchQuery) {
-  return await fetch(
-    `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&query=${searchQuery}&page=${1}&include_adult=folse`
-  )
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not OK');
-      }
-      return response.json();
-    })
-    .then(data => {
-      return data.results;
-    })
-    .catch(error => {
-      console.error('error:', error);
-    });
-};
+// // fetch search movie
+// async function fetchMovieSearchAPI(searchQuery) {
+//   return await fetch(
+//     `${BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&query=${searchQuery}&page=${1}&include_adult=folse`
+//   )
+//     .then(response => {
+//       if (!response.ok) {
+//         throw new Error('Network response was not OK');
+//       }
+//       return response.json();
+//     })
+//     .then(data => {
+//       return data.results;
+//     })
+//     .catch(error => {
+//       console.error('error:', error);
+//     });
+// };
