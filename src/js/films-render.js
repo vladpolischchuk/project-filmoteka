@@ -4,7 +4,7 @@ import { refs } from './refs';
 import { currentPage } from './pagination';
 
 // function for render film list markup 
-export function createMovieListMarkup(data, genres_names) {
+export default function createMovieListMarkup(data, genres_names) {
     if (data.length === 0) {
         return;
     }
