@@ -1,8 +1,10 @@
-import { fetchPopularFilmsAPI, fetchGenresFilmsAPI } from './API/fetch-film-api';
+import { fetchPopularMovieAPI, fetchGenresMovieAPI } from './API/fetch-film-api';
 import { refs } from './refs';
 
+import { currentPage } from './pagination';
+
 // function for render film list markup 
-export function createFilmListFMarkup(data, genres_names) {
+export function createMovieListMarkup(data, genres_names) {
     if (data.length === 0) {
         return;
     }
@@ -34,7 +36,7 @@ export function createFilmListFMarkup(data, genres_names) {
             }
             return `
                 <li class="film-list__item item" data-id="${id}  data-target="card">
-                    <img class="film-link__img" src="./images/plug/plugImg.png" alt="${title}" data-target="card"">
+                <img class="film-link__img" src="../images/header-home-page/background-pc.jpg" alt="${title}" data-target="card"">
                     <div class="wrapper">
                         <h3 class="film-link__title data-target="card"" >${title}</h3>
                         <div class="film-link__grup">
@@ -45,9 +47,9 @@ export function createFilmListFMarkup(data, genres_names) {
                 </li>`;}).join('');
 };
 
-fetchGenresFilmsAPI().then(genres => {
-    fetchPopularFilmsAPI().then(data => {
-        let markup = createFilmListFMarkup(data, genres);
+fetchGenresMovieAPI().then(genres => {
+    fetchPopularMovieAPI(currentPage).then(data => {
+        let markup = createMovieListMarkup(data, genres);
         refs.popularMovieList.insertAdjacentHTML('beforeend', markup);
     });
 });

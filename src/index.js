@@ -1,4 +1,5 @@
 import './js/refs';
+import './js/pagination';
 
 import './js/films-render';
 

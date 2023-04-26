@@ -1,16 +1,19 @@
+import { pagination } from "../pagination";
+
 const BASE_URL = 'https://api.themoviedb.org/3';
 const API_KEY = 'cf961b1b89f4c4a28558be2b04fdd59a';
-const page = 1;
 
 export {
-  fetchPopularFilmsAPI,
-  fetchGenresFilmsAPI,
+  fetchPopularMovieAPI,
+  fetchMorePopularMovieAPI,
+  fetchGenresMovieAPI,
   fetchMovieInfoAPI,
   fetchMovieSearchAPI,
 };
 
-// fetch information about popular movies
-async function fetchPopularFilmsAPI() {
+// fetch popular movies
+async function fetchPopularMovieAPI(page) {
+
   return await fetch(`${BASE_URL}/trending/movie/day?api_key=${API_KEY}&page=${page}`)
     .then(response => {
       if (!response.ok) {
@@ -19,6 +22,33 @@ async function fetchPopularFilmsAPI() {
       return response.json();
     })
     .then(data => {
+      pagination.reset(data.total_results);
+
+      return data.results;
+    })
+    .catch(error => {
+      console.error(
+        'There has been a problem with your fetch operation:',
+        error
+      );
+    });
+};
+
+// fetch more popular movie
+async function fetchMorePopularMovieAPI(page) {
+  return await fetch(`${BASE_URL}/trending/movie/day?api_key=${API_KEY}&page=${page}`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not OK');
+      }
+      return response.json();
+    })
+    .then(data => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+
       return data.results;
     })
     .catch(error => {
@@ -30,7 +60,7 @@ async function fetchPopularFilmsAPI() {
 };
 
 // fetch id and names ganre for movies
-async function fetchGenresFilmsAPI() {
+async function fetchGenresMovieAPI() {
   return await fetch(`${BASE_URL}/genre/movie/list?api_key=${API_KEY}`)
     .then(response => {
       if (!response.ok) {
