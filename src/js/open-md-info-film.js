@@ -69,8 +69,6 @@ export default function openMovieModal(e) {
     } else {
 
         const movieId = e.target.closest('li').dataset.id;
-
-        document.removeEventListener('click', openMovieModal);
     
         fetchMovieInfoAPI(movieId)
             .then(createModalMarkup);
@@ -79,11 +77,7 @@ export default function openMovieModal(e) {
 
 
 export default function closeMovieModalWindow() {
-
-    bodyPage.innerHTML = '';
     backdrop.classList.add('is-hidden');
-
-    listOfMovies.addEventListener('click', openMovieModal);
 };
 
 
