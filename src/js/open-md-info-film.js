@@ -1,4 +1,4 @@
-import scrollLock from 'scroll-lock';
+import { disablePageScroll, enablePageScroll } from 'scroll-lock';
 
 import { refs } from './refs';
 import { fetchMovieInfoAPI } from './API/fetch-film-api';
@@ -69,7 +69,7 @@ export default function openMovieModal(e) {
     if (e.target.dataset.target !== 'card') {
         return;
     } else {
-        scrollLock.disablePageScroll();
+        disablePageScroll();
 
         const movieId = e.target.closest('li').dataset.id;
 
@@ -88,7 +88,7 @@ export default function closeMovieModalWindow() {
     bodyPage.innerHTML = '';
     backdrop.classList.add('is-hidden');
 
-    scrollLock.enablePageScroll();
+    enablePageScroll();
 
     document.addEventListener('click', openMovieModal);
 };
