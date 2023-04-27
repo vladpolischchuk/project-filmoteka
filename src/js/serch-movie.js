@@ -1,21 +1,40 @@
-import { fetchGenresMovieAPI, fetchMovieSearchAPI } from './API/fetch-film-api';
+import { fetchGenresMovieAPI } from './API/fetch-genres-movie';
+import { fetchMovieSearchAPI, fetchMoreMovieSearchAPI, pagination } from './API/fetch-search-movie';
 import { createMovieListMarkup } from './films-render';
 import { refs } from './refs';
 
-const searchForm = document.querySelector('.form-search');
+let value = '';
+const currentPage = pagination.getCurrentPage();
+const {
+    searchForm,
+    popularMovieList,
+} = refs;
 
 async function onInput(e) {
     e.preventDefault();
-  
-    const value = e.target.elements.searchQuery.value.trim();
+
+    value = e.target.elements.searchQuery.value.trim();
 
     await fetchGenresMovieAPI().then(genres => {
-        fetchMovieSearchAPI(value).then(data => {
+        fetchMovieSearchAPI(value, currentPage).then(data => {
             let markup = createMovieListMarkup(data, genres);
-            refs.popularMovieList.innerHTML = '';
-            refs.popularMovieList.insertAdjacentHTML('beforeend', markup);
+            popularMovieList.innerHTML = '';
+            popularMovieList.insertAdjacentHTML('beforeend', markup);
         });
     });
-  }
+};
+
+pagination.on('afterMove', event => {
+    const page = event.page;
+
+    fetchGenresMovieAPI().then(genres => {
+        fetchMoreMovieSearchAPI(value, page).then(data => {
+            let markup = createMovieListMarkup(data, genres);
+
+            popularMovieList.innerHTML = '';
+            popularMovieList.insertAdjacentHTML('beforeend', markup);
+        });
+    });
+});
 
 searchForm.addEventListener('submit', onInput);

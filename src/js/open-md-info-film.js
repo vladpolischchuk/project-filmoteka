@@ -1,10 +1,13 @@
 import { refs } from './refs';
-import { fetchMovieInfoAPI } from './API/fetch-film-api';
+import { fetchMovieInfoAPI } from './API/fetch-movie-info';
 
-const listOfMovies = document.querySelector('.home-film-list');
-const bodyPage = document.querySelector('.wrapper-modal');
-const backdrop = document.querySelector('.backdrop')
-const closeBTN = document.querySelector('.close-btn');
+const {
+    BASE_IMG_URL,
+    listOfMovies,
+    bodyPage,
+    backdrop,
+    closeBTN
+} = refs;
 
 // function for render modal markup 
 function createModalMarkup({ id, genres, original_title, overview, popularity, poster_path, title, vote_average, vote_count }) {
@@ -12,12 +15,12 @@ function createModalMarkup({ id, genres, original_title, overview, popularity, p
     const popularityNumeric = popularity.toFixed(1);
 
     const nameGenres = genres.map((item) => {
-       return item.name;
+        return item.name;
     });
 
     const modalMarkup = `
         <div class="film-modal__poster">
-            <img class='film-modal__img' width="375" height="478" src="${refs.BASE_IMG_URL}${poster_path}"
+            <img class='film-modal__img' width="375" height="478" src="${BASE_IMG_URL}${poster_path}"
                 alt="${title}" />
         </div>
         
@@ -70,15 +73,14 @@ export default function openMovieModal(e) {
 
         const movieId = e.target.closest('li').dataset.id;
         backdrop.addEventListener('click', closeMovieModalWindowBackdrop);
-    
+
         fetchMovieInfoAPI(movieId)
             .then(createModalMarkup);
     };
-};   
+};
 
 
 function closeMovieModalWindow() {
-
     bodyPage.innerHTML = "";
     backdrop.classList.add('is-hidden');
 };

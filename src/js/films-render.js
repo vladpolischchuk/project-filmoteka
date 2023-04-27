@@ -1,7 +1,11 @@
-import { fetchPopularMovieAPI, fetchGenresMovieAPI } from './API/fetch-film-api';
+import { fetchGenresMovieAPI } from './API/fetch-genres-movie';
+import { fetchPopularMovieAPI, fetchMorePopularMovieAPI, pagination } from './API/fetch-popular-movie';
 import { refs } from './refs';
 
-const numberPage = 1;
+const {
+    BASE_IMG_URL,
+    popularMovieList
+} = refs;
 
 // function for render film list markup 
 export function createMovieListMarkup(data, genres_names) {
@@ -24,7 +28,7 @@ export function createMovieListMarkup(data, genres_names) {
             if (poster_path !== null) {
                 return `
                 <li class="film-list__item item" data-id="${id}  data-target="card">
-                    <img class="film-link__img" src="${refs.BASE_IMG_URL}${poster_path}" alt="${title}" data-target="card"">
+                    <img class="film-link__img" src="${BASE_IMG_URL}${poster_path}" alt="${title}" data-target="card"">
                     <div class="wrapper">
                         <h3 class="film-link__title data-target="card"" >${title}</h3>
                         <div class="film-link__grup">
@@ -36,7 +40,7 @@ export function createMovieListMarkup(data, genres_names) {
             }
             return `
                 <li class="film-list__item item" data-id="${id}  data-target="card">
-                <img class="film-link__img" src="" alt="${title}" data-target="card"">
+                <img class="film-link__img" src="https://images.unsplash.com/photo-1512113569142-8a60fccc7caa" alt="${title}" data-target="card"">
                     <div class="wrapper">
                         <h3 class="film-link__title data-target="card"" >${title}</h3>
                         <div class="film-link__grup">
@@ -44,12 +48,28 @@ export function createMovieListMarkup(data, genres_names) {
                             <p class="film-year" data-target="card"><span class="film-line">|</span>${release}</p>
                         </div>
                     </div>
-                </li>`;}).join('');
+                </li>`;
+        }).join('');
 };
 
+const currentPage = pagination.getCurrentPage();
+
 fetchGenresMovieAPI().then(genres => {
-    fetchPopularMovieAPI(numberPage).then(data => {
+    fetchPopularMovieAPI(currentPage).then(data => {
         let markup = createMovieListMarkup(data, genres);
-        refs.popularMovieList.insertAdjacentHTML('beforeend', markup);
+        popularMovieList.insertAdjacentHTML('beforeend', markup);
+    });
+});
+
+pagination.on('afterMove', event => {
+    const page = event.page;
+
+    fetchGenresMovieAPI().then(genres => {
+        fetchMorePopularMovieAPI(page).then(data => {
+            let markup = createMovieListMarkup(data, genres);
+
+            popularMovieList.innerHTML = '';
+            popularMovieList.insertAdjacentHTML('beforeend', markup);
+        });
     });
 });
