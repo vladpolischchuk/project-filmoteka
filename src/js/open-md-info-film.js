@@ -8,10 +8,10 @@ const {
     BASE_IMG_URL,
     body,
     listOfMovies,
+    libraryMovieList,
     bodyPage,
     backdrop,
     closeBTN,
-    btn
 } = refs;
 
 // function for render modal markup 
@@ -125,18 +125,57 @@ function createModalMarkup({ id, genres, original_title, overview, popularity, p
     const btnWatched = document.querySelector('.watched');
     const btnQueue = document.querySelector('.queue');
 
-    listWatchedMuvie = localStorage.getItem('watchedMovies')
-    console.log(listWatchedMuvie)
-    if (listWatchedMuvie.includes(id)) {
-        btnWatched.innerText = 'Remove from watched';
+    listWatchedMuvie = JSON.parse(localStorage.getItem('watchedMovies')) || [];
+    listQueueMuvie = JSON.parse(localStorage.getItem('queueMovies')) || [];
+        
+    if(listWatchedMuvie.includes(String(id))) {
+        btnWatched.textContent = 'Remove from watched';
+    } else {
+        btnWatched.textContent = 'Add to watched';
     };
 
-    if (listQueueMuvie.includes(id)) {
-        btnWatched.innerText = 'Remove from queue';
-    }
+    if(listQueueMuvie.includes(String(id))) {
+        btnQueue.textContent = 'Remove from queue';
+    } else {
+        btnQueue.textContent = 'Add to queue';
+    };
 
     btnWatched.addEventListener('click', addToLibrary);
-    btnQueue.addEventListener('click', addToLibrary);
+    btnQueue.addEventListener('click', addToQueue);
+
+    function addToLibrary(e) {
+        if (e.target.closest('button').classList.contains('watched')) {
+            const movieId = e.target.dataset.id;
+
+            if(listWatchedMuvie.includes(movieId)) {
+                let index = listWatchedMuvie.indexOf(movieId);
+                listWatchedMuvie.splice(index, 1);
+                btnWatched.textContent = 'Add to watched';
+            } else {
+                listWatchedMuvie.push(movieId);
+                btnWatched.textContent = 'Remove from watched';
+            };
+
+            localStorage.setItem('watchedMovies', JSON.stringify(listWatchedMuvie));
+        } 
+    };
+
+    function addToQueue(e) {
+        if (e.target.closest('button').classList.contains('queue')) {
+            const movieId = e.target.dataset.id;
+
+            if(listQueueMuvie.includes(movieId)) {
+                let index = listQueueMuvie.indexOf(movieId);
+                listQueueMuvie.splice(index, 1);
+                btnQueue.textContent = 'Add to queue';
+            } else {
+                listQueueMuvie.push(movieId);
+                btnQueue.textContent = 'Remove from queue';
+            };
+
+            localStorage.setItem('queueMovies', JSON.stringify(listQueueMuvie));
+        } 
+    };
 };
 
 // function open/close modal window
@@ -177,24 +216,5 @@ const closeMovieModalWindowEscape = event => {
 };
 
 listOfMovies.addEventListener('click', openMovieModal);
+libraryMovieList.addEventListener('click', openMovieModal);
 window.addEventListener('keydown', closeMovieModalWindowEscape);
-
-function addToLibrary(e) {
-    if (e.target.closest('button').classList.contains('watched')) {
-        const movieId = e.target.dataset.id;
-
-        if (!listWatchedMuvie.includes(movieId)) {
-            listWatchedMuvie.push(movieId);
-        };
-
-        localStorage.setItem('watchedMovies', JSON.stringify(listWatchedMuvie));
-
-    } else if (e.target.closest('button').classList.contains('queue')) {
-        const movieId = e.target.dataset.id;
-
-        if (!listQueueMuvie.includes(movieId)) {
-            listQueueMuvie.push(movieId);
-        };
-    };
-};
-

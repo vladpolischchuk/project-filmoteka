@@ -6,6 +6,8 @@ export const refs = {
   body: document.querySelector('.body'),
 
   popularMovieList: document.querySelector('.home-film-list'),
+  libraryMovieList: document.querySelector('.library-film-list'),
+
   paginationLink: document.querySelector('.tui-pagination'),
 
   listOfMovies: document.querySelector('.home-film-list'),
