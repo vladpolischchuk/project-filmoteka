@@ -11,11 +11,11 @@
                 </svg>
                 <span class="logo__title">Filmoteka</span>
             </a>
-            
+
             <!-- Navigation -->
             <nav class="navigation">
                 <ul class="navigation__list list">
-            
+
                     <li class="navigation__item item">
                         <a href="./index.html" class="navigation__link link ">Home</a>
                     </li>
@@ -23,26 +23,12 @@
                         <a href="./library.html" class="navigation__link link link__active">my library</a>
                     </li>
                 </ul>
-            
+
             </nav>
         </div>
-       
-        <!-- Form Search movie -->
-        <form class="form-search">
-
-            <label for="name" class="form-search__group">
-
-                <input class="form-search__input" type="text" name="searchQuery" id="name" required placeholder="_" value="">
-                <span class="form-search__label">Movie search</span>
-
-                <button type="submit" class="form-search__submit">
-                    <svg class="form-search__icon" width="30" height="15">
-                        <use class="form-search__icon-svg" href="./images/sprit.svg#icon-search"></use>
-                    </svg>
-                </button>
-
-            </label>
-
-        </form>
+        <div class='wrapper-btn'>
+          <button class='btn btn__dark-mode btn_watched'>Watched</button>
+          <button class='btn btn__dark-mode btn_queue'>queue</button>
+        </div>
     </div>
 </header>

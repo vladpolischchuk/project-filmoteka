@@ -7,21 +7,23 @@ let value = '';
 const currentPage = pagination.getCurrentPage();
 const {
     searchForm,
-    popularMovieList,
+    listOfMovies,
+    searchQuery,
 } = refs;
 
 async function onInput(e) {
     e.preventDefault();
-
     value = e.target.elements.searchQuery.value.trim();
 
     await fetchGenresMovieAPI().then(genres => {
         fetchMovieSearchAPI(value, currentPage).then(data => {
             let markup = createMovieListMarkup(data, genres);
-            popularMovieList.innerHTML = '';
-            popularMovieList.insertAdjacentHTML('beforeend', markup);
+            listOfMovies.innerHTML = '';
+            listOfMovies.insertAdjacentHTML('beforeend', markup);
         });
-    });
+    })
+
+    searchQuery.value = '';
 };
 
 pagination.on('afterMove', event => {
@@ -31,8 +33,8 @@ pagination.on('afterMove', event => {
         fetchMoreMovieSearchAPI(value, page).then(data => {
             let markup = createMovieListMarkup(data, genres);
 
-            popularMovieList.innerHTML = '';
-            popularMovieList.insertAdjacentHTML('beforeend', markup);
+            listOfMovies.innerHTML = '';
+            listOfMovies.insertAdjacentHTML('beforeend', markup);
         });
     });
 });

@@ -1,0 +1,13 @@
+.wrapper-btn {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+
+  @media screen and (min-width: 767.5px) {
+   gap: 32px;
+  }
+
+  @media screen and (min-width: 1199.5px) {
+    gap: 16px;
+  }
+}

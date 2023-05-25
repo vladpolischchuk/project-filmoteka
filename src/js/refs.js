@@ -4,8 +4,8 @@ export const refs = {
   BASE_IMG_URL: 'https://image.tmdb.org/t/p/w500',
 
   body: document.querySelector('.body'),
+  searchQuery: document.querySelector('.form-search__input'),
 
-  popularMovieList: document.querySelector('.home-film-list'),
   libraryMovieList: document.querySelector('.library-film-list'),
 
   paginationLink: document.querySelector('.tui-pagination'),
@@ -17,4 +17,8 @@ export const refs = {
   closeBTN: document.querySelector('.close-btn'),
 
   searchForm: document.querySelector('.form-search'),
+
+  btnWrapper: document.querySelector('.wrapper-btn'),
+  btnWatched: document.querySelector('.btn_watched'),
+  btnQueue: document.querySelector('.btn_queue'),
 };

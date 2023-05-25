@@ -1,13 +1,14 @@
 import { fetchGenresMovieAPI } from './API/fetch-genres-movie';
 import { fetchPopularMovieAPI, fetchMorePopularMovieAPI, pagination } from './API/fetch-popular-movie';
 import { refs } from './refs';
+import openMovieModal from './open-md-info-film';
 
 const {
     BASE_IMG_URL,
-    popularMovieList
+    listOfMovies
 } = refs;
 
-// function for render film list markup 
+// function for render film list markup
 export function createMovieListMarkup(data, genres_names) {
     if (data.length === 0) {
         return;
@@ -57,7 +58,7 @@ const currentPage = pagination.getCurrentPage();
 fetchGenresMovieAPI().then(genres => {
     fetchPopularMovieAPI(currentPage).then(data => {
         let markup = createMovieListMarkup(data, genres);
-        popularMovieList.insertAdjacentHTML('beforeend', markup);
+        listOfMovies.insertAdjacentHTML('beforeend', markup);
     });
 });
 
@@ -68,8 +69,10 @@ pagination.on('afterMove', event => {
         fetchMorePopularMovieAPI(page).then(data => {
             let markup = createMovieListMarkup(data, genres);
 
-            popularMovieList.innerHTML = '';
-            popularMovieList.insertAdjacentHTML('beforeend', markup);
+            listOfMovies.innerHTML = '';
+            listOfMovies.insertAdjacentHTML('beforeend', markup);
         });
     });
 });
+
+listOfMovies.addEventListener('click', openMovieModal);
